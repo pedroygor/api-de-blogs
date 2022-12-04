@@ -1,8 +1,11 @@
 const express = require('express');
 
 const loginController = require('./controllers/loginControllers');
+const userController = require('./controllers/userController');
 
 const validateFieldsLogin = require('./middlewares/validateFieldsLogin');
+const validateFieldsUser = require('./middlewares/validateFieldsUser');
+const validateEmailAready = require('./middlewares/validateEmailAlready');
 
 // ...
 
@@ -14,6 +17,13 @@ app.post(
   '/login', 
   validateFieldsLogin,
   loginController.authenticateLoginController,
+);
+
+app.post(
+  '/user',
+  validateFieldsUser,
+  validateEmailAready,
+  userController.createUserController,
 );
 
 // ...
