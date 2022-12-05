@@ -7,6 +7,8 @@ const validateFieldsLogin = require('./middlewares/validateFieldsLogin');
 const validateFieldsUser = require('./middlewares/validateFieldsUser');
 const validateEmailAready = require('./middlewares/validateEmailAlready');
 const validateJWT = require('./middlewares/validateJWT');
+const validateName = require('./middlewares/validateName');
+const { createCategoryController } = require('./controllers/categoryController');
 
 // ...
 
@@ -39,6 +41,12 @@ app.get(
   userController.getUserById,
 );
 
+app.post(
+  '/categories',
+  validateJWT,
+  validateName,
+  createCategoryController,
+);
 // ...
 
 // É importante exportar a constante `app`,
