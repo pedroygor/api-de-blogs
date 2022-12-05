@@ -8,7 +8,7 @@ const validateFieldsUser = require('./middlewares/validateFieldsUser');
 const validateEmailAready = require('./middlewares/validateEmailAlready');
 const validateJWT = require('./middlewares/validateJWT');
 const validateName = require('./middlewares/validateName');
-const { createCategoryController } = require('./controllers/categoryController');
+const { createCategoryController, getAllCategories } = require('./controllers/categoryController');
 
 // ...
 
@@ -46,6 +46,12 @@ app.post(
   validateJWT,
   validateName,
   createCategoryController,
+);
+
+app.get(
+  '/categories',
+  validateJWT,
+  getAllCategories,
 );
 // ...
 
