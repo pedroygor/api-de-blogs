@@ -33,6 +33,12 @@ app.get(
   userController.getAllUsers,
 );
 
+app.get(
+  '/user/:id',
+  validateJWT, 
+  userController.getUserById,
+);
+
 // ...
 
 // É importante exportar a constante `app`,

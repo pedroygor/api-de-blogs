@@ -18,13 +18,18 @@ const getAll = async () => {
 };
 
 const userById = async (userId) => {
-  const user = await User.findByPk(userId);
+  const user = await User.findAll({
+    where: {
+      id: userId,
+    },
+    attributes: { exclude: ['password'] },
+  });
 
-  if (!user) {
-    return { type: 400, message: 'user not found' };
+  if (user.length === 0) {
+    return { type: 400, message: 'User does not exist' };
   }
 
-  return { type: null, message: user };
+  return { type: null, message: user[0] };
 };
 
 module.exports = {
