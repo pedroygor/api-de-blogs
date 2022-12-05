@@ -6,6 +6,7 @@ const userController = require('./controllers/userController');
 const validateFieldsLogin = require('./middlewares/validateFieldsLogin');
 const validateFieldsUser = require('./middlewares/validateFieldsUser');
 const validateEmailAready = require('./middlewares/validateEmailAlready');
+const validateJWT = require('./middlewares/validateJWT');
 
 // ...
 
@@ -24,6 +25,12 @@ app.post(
   validateFieldsUser,
   validateEmailAready,
   userController.createUserController,
+);
+
+app.get(
+  '/user',
+  validateJWT, 
+  userController.getAllUsers,
 );
 
 // ...
