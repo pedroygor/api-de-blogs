@@ -22,6 +22,7 @@ module.exports = async (req, res, next) => {
       return res.status(401).json({ message: 'Expired or invalid token' });
     }
     
+    req.header.userId = decoded.payload.userId;
     next();
   } catch (error) {
     return res.status(401).json({ message: 'Expired or invalid token' });

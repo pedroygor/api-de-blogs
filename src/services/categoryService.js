@@ -14,4 +14,18 @@ const getAll = async () => {
   return { type: null, message: categories };
 };
 
-module.exports = { createCategory, getAll };
+const getAllById = async () => {
+  const categoryById = await Category.findAll({ attributes: ['id'] });
+
+  return { type: null, message: categoryById };
+};
+
+const getById = async (categoryId) => {
+  const category = await Category.findAll({
+    where: { id: categoryId },
+  });
+
+  return { type: null, message: category };
+};
+
+module.exports = { createCategory, getAll, getById, getAllById };
