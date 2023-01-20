@@ -5,7 +5,7 @@ const secret = process.env.JWT_SECRET || '7WykE@16cXDf';
 
 const config = {
   algorithm: 'HS256',
-  expiresIn: '15d',
+  expiresIn: '360d',
 };
 
 const createToken = (payload) => {

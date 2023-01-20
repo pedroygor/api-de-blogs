@@ -4,11 +4,11 @@ const authenticateLoginController = async (req, res) => {
   const { email, password } = req.body;
   const { type, message, token } = await authenticateLogin(email, password);
 
-  if (type !== null) {
+  if (type) {
     return res.status(type).json({ message });
   }
 
-   res.status(200).json({ token });
+  res.status(200).json({ token });
 };
 
 module.exports = {

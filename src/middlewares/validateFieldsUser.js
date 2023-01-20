@@ -5,7 +5,7 @@ const EMAIL_FORMAT = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
 module.exports = async (req, res, next) => {
   const { displayName, email, password } = req.body;
   
-  const validEmail = email.match(EMAIL_FORMAT);
+  const isValidEmail = email.match(EMAIL_FORMAT);
 
 if (displayName.length < MIN_LENGTH_DISPLAY_NAME) {
     return res.status(400).json({
@@ -13,7 +13,7 @@ if (displayName.length < MIN_LENGTH_DISPLAY_NAME) {
     });
   }
 
-  if (!validEmail) {
+  if (!isValidEmail) {
     return res.status(400).json({
       message: '"email" must be a valid email',
     });

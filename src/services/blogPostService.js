@@ -1,7 +1,11 @@
-const { BlogPost, Category, sequelize, PostCategory } = require('../models');
+const { BlogPost, Category, sequelize, PostCategory, User } = require('../models');
 
 const getAll = async () => {
-  const categories = await BlogPost.findAll({ include: Category });
+  const categories = await BlogPost.findAll({ include: [
+    { model: User, as: 'user', attributes: { exclude: ['password'] } },
+    { model: Category, as: 'categories' }, 
+],
+order: [['id', 'ASC']] });
 
   return { type: null, message: categories };
 };
@@ -15,7 +19,7 @@ const createPost = async (title, content, categoryIds, userId) => {
         userId,
       }, { transaction: t });
       
-      categoryIds.map(async (id) => {
+      categoryIds.map(async (id) => { 
        await PostCategory.create({ postId: post.id, categoryId: id });
       });
   
