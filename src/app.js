@@ -9,7 +9,11 @@ const validateFieldPost = require('./middlewares/validateFieldsPost');
 const validateCategoryAlready = require('./middlewares/validateCategoryAlready');
 
 const { createCategoryController, getAllCategories } = require('./controllers/categoryController');
-const { createPostController, getAllPosts } = require('./controllers/blogPostController');
+const { 
+  createPostController, 
+  getAllPosts, 
+  getPostById, 
+} = require('./controllers/blogPostController');
 const loginController = require('./controllers/loginControllers');
 const userController = require('./controllers/userController');
 
@@ -69,6 +73,12 @@ app.get(
   '/post',
   validateJWT,
   getAllPosts,
+);
+
+app.get(
+  '/post/:id',
+  validateJWT,
+  getPostById,
 );
 
 // É importante exportar a constante `app`,

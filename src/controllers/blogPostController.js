@@ -1,4 +1,4 @@
-const { getAll, createPost } = require('../services/blogPostService');
+const { getAll, createPost, getById } = require('../services/blogPostService');
 
 const getAllPosts = async (_req, res) => {
   const { message } = await getAll();
@@ -18,4 +18,15 @@ const createPostController = async (req, res) => {
   res.status(201).json(message);
 };
 
-module.exports = { getAllPosts, createPostController };
+const getPostById = async (req, res) => {
+  const { id } = req.params;
+  const { type, message } = await getById(id);
+
+  if (type) {
+    return res.status(type).json({ message });
+  }
+
+  return res.status(200).json(message);
+};
+
+module.exports = { getAllPosts, createPostController, getPostById };
